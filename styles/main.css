@@ -4,8 +4,8 @@
   --secondary-color: #ffdc60;
   --dark-color: #27272e;
   --light-color: #ffffff;
-  --text-color: #3c3e41;
-  --gray-color: #c4cfde;
+  --text-color: #090a0a;
+  --gray-color: #000000;
   --bg-light: #e2e8ec;
 
   --font-primary: "Poppins", sans-serif;
@@ -107,7 +107,7 @@ p {
 }
 
 .btn-primary:hover {
-  background: #e00144;
+  background: #cabbbf;
   transform: translateY(-2px);
 }
 
@@ -171,9 +171,11 @@ section {
   align-items: center;
   padding: 20px 0;
 }
-
 .logo-img {
-  height: 50px;
+  height: 81px;
+  width: 81px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .nav-list {
@@ -334,23 +336,24 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   margin-bottom: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #e5ebf0;
+  color: #000;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
 }
 
-.project-card:nth-child(even) {
+/* .project-card:nth-child(even) {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
+} */
 
-.project-card:nth-child(3n) {
+/* .project-card:nth-child(3n) {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
+} */
 
 .project-content {
   padding: 60px;
-  color: var(--light-color);
+  color: #000000;
 }
 
 .project-category {
@@ -373,12 +376,24 @@ section {
 }
 
 .project-content .btn-link {
-  color: var(--light-color);
+  color: #000000;
 }
 
 .project-image {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(236, 230, 230, 0.1);
   min-height: 400px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
 }
 
 /* Back to Top */
@@ -408,4 +423,16 @@ section {
 .back-to-top:hover {
   transform: translateY(-5px);
   background: #e00144;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.logo h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 1rem;
+  font-weight: 700;
 }
