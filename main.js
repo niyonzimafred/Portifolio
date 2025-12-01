@@ -677,6 +677,107 @@ Our assumptions are often wrong. By testing designs with actual users and observ
 // Removed - using page navigation instead
 
 // Export functions for use in other files
+// ========================================
+// PROJECT DETAIL PAGE FUNCTIONS
+// ========================================
+
+const projectData = {
+  1: {
+    title: "Boosting Conversions by 40%",
+    category: "E-Commerce Redesign",
+    image: "./styles/image/PROJECT.jpeg",
+    date: "Mar 2024",
+    readTime: "8 min read",
+    content: `<p>This e-commerce platform was struggling with a high cart abandonment rate and low conversion metrics. By redesigning the user journey and simplifying the checkout process, we achieved a 40% increase in conversions.</p>
+    
+<p><strong>The Challenge:</strong> The original platform had a complex navigation structure, unclear product filtering, and a multi-step checkout that frustrated users. Cart abandonment rate was at 35%, significantly higher than industry standards.</p>
+
+<p><strong>Our Approach:</strong> We conducted extensive user research through interviews and usability testing. The findings revealed that users were overwhelmed by too many choices and unclear product information. We implemented:</p>
+
+<p>1. <strong>Simplified Product Discovery:</strong> Redesigned the product filtering system with clear categories and better visual hierarchy.</p>
+
+<p>2. <strong>Enhanced Product Pages:</strong> Added high-quality images, detailed descriptions, and customer reviews to build trust and reduce decision fatigue.</p>
+
+<p>3. <strong>Streamlined Checkout:</strong> Reduced the checkout process from 6 steps to 3 major steps. Implemented guest checkout options and one-click payment for returning customers.</p>
+
+<p>4. <strong>Mobile-First Design:</strong> Ensured the entire platform was optimized for mobile devices, recognizing that 60% of traffic came from mobile.</p>
+
+<p><strong>Results:</strong> Within three months of launch, we saw a 40% increase in conversion rates, a 25% reduction in cart abandonment, and a 35% improvement in average order value. Customer satisfaction scores increased by 28 points.</p>`
+  },
+  2: {
+    title: "Simplifying Complexity",
+    category: "SaaS Dashboard",
+    image: "./styles/image/project 4.jpeg",
+    date: "Jan 2024",
+    readTime: "7 min read",
+    content: `<p>A complex SaaS analytics dashboard was overwhelming users with data and features. Through thoughtful information architecture and progressive disclosure, we created an intuitive interface that increased user engagement by 45%.</p>
+    
+<p><strong>The Challenge:</strong> The original dashboard displayed hundreds of metrics across multiple views, making it difficult for new users to understand what they were looking at. Advanced users loved the depth of features, but new users were overwhelmed and many never returned.</p>
+
+<p><strong>Our Approach:</strong> We created different dashboard layouts for different user types and skill levels. The strategy included:</p>
+
+<p>1. <strong>User Segmentation:</strong> Identified three user personas - beginners, power users, and analysts. Designed tailored experiences for each group.</p>
+
+<p>2. <strong>Progressive Disclosure:</strong> Started new users with essential metrics and gradually revealed advanced features as they gained comfort.</p>
+
+<p>3. <strong>Smart Defaults:</strong> Configured pre-built dashboard templates that users could customize rather than starting from scratch.</p>
+
+<p>4. <strong>Guided Onboarding:</strong> Created an interactive tour that highlighted key features and explained critical metrics in context.</p>
+
+<p>5. <strong>Advanced Search:</strong> Implemented powerful search and filtering to help power users find specific metrics quickly.</p>
+
+<p><strong>Results:</strong> First-week user engagement increased by 45%, feature adoption tripled, and churn rate decreased by 20%. Support tickets related to confusion decreased by 60%.</p>`
+  },
+  3: {
+    title: "Enhancing Student Success",
+    category: "E-Learning Platform",
+    image: "./styles/image/project 3.jpeg",
+    date: "Feb 2024",
+    readTime: "9 min read",
+    content: `<p>An e-learning platform was struggling with low engagement and completion rates. By redesigning the learning experience with gamification and personalization, we increased completion rates by 55% and engagement time by 3.2x.</p>
+    
+<p><strong>The Challenge:</strong> Students were dropping out of courses at high rates. The platform lacked engagement features, course progression was unclear, and personalization was minimal. Students didn't feel motivated to complete their learning journeys.</p>
+
+<p><strong>Our Approach:</strong> We conducted extensive interviews with students, teachers, and administrators to understand pain points. The redesign included:</p>
+
+<p>1. <strong>Clear Learning Paths:</strong> Redesigned course navigation to show clear progression from start to finish with milestone achievements.</p>
+
+<p>2. <strong>Gamification Elements:</strong> Added achievement badges, progress streaks, and points system without making it feel gimmicky. These elements were tied to meaningful learning outcomes.</p>
+
+<p>3. <strong>Personalized Recommendations:</strong> Implemented an algorithm that suggests next courses based on student interests and learning patterns.</p>
+
+<p>4. <strong>Interactive Content:</strong> Enhanced course content with quizzes, discussion forums, and peer-to-peer learning opportunities.</p>
+
+<p>5. <strong>Progress Tracking:</strong> Created visual progress indicators and analytics dashboards that help students understand their learning journey.</p>
+
+<p>6. <strong>Mobile-Optimized:</strong> Ensured students could continue their learning on-the-go with a fully responsive mobile experience.</p>
+
+<p><strong>Results:</strong> Course completion rates increased from 45% to 70%, average engagement time per session increased from 18 minutes to 58 minutes, and student satisfaction scores improved by 35 points. Instructor satisfaction also increased as they could now track student progress more effectively.</p>`
+  }
+};
+
+function goToProjectDetail(projectId) {
+  window.location.href = `project-detail.html?id=${projectId}`;
+}
+
+function loadProjectDetailPage(projectId) {
+  const project = projectData[projectId];
+  
+  if (!project) {
+    console.error(`Project ${projectId} not found`);
+    return;
+  }
+
+  document.getElementById("pageDetailImage").src = project.image;
+  document.getElementById("pageDetailCategory").textContent = project.category;
+  document.getElementById("pageDetailTitle").textContent = project.title;
+  document.getElementById("pageDetailTime").textContent = `${project.date} · ${project.readTime}`;
+  document.getElementById("pageDetailText").innerHTML = project.content;
+  
+  // Update page title
+  document.title = project.title + " - Fred - Senior UX Designer";
+}
+
 window.portfolioUtils = {
   validateForm,
   debounce,
@@ -688,4 +789,6 @@ window.portfolioUtils = {
   scrollToSection,
   goToBlogDetail,
   loadBlogDetailPage,
+  goToProjectDetail,
+  loadProjectDetailPage,
 };

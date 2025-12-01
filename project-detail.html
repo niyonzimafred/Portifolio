@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project - Fred - Senior UX Designer</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+  </head>
+  <body class="white-version">
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/">
+              <img
+                src="./styles/image/fred.jpg"
+                alt="Fred Logo"
+                class="logo-img"
+              />
+            </a>
+            <h2>FRED</h2>
+          </div>
+
+          <nav class="nav" id="nav">
+            <ul class="nav-list">
+              <li><a href="Index.html#home">Home</a></li>
+              <li><a href="Index.html#about">About</a></li>
+              <li><a href="Index.html#services">Services</a></li>
+              <li><a href="Index.html#portfolio">Portfolio</a></li>
+              <li><a href="Index.html#skills">Skills</a></li>
+              <li><a href="Index.html#blog">Blog</a></li>
+              <li><a href="Index.html#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <button class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Project Detail Page -->
+    <section class="blog-detail-page" id="projectDetailPage">
+      <div class="container">
+        <!-- Back Button -->
+        <a href="Index.html#portfolio" class="blog-back-link">← Back to Portfolio</a>
+
+        <article class="blog-article">
+          <!-- Hero Image -->
+          <div class="blog-hero-image">
+            <img src="" alt="" id="pageDetailImage" />
+          </div>
+
+          <!-- Content -->
+          <div class="blog-article-content">
+            <span class="blog-category" id="pageDetailCategory"></span>
+            <h1 id="pageDetailTitle"></h1>
+
+            <div class="blog-article-meta">
+              <span class="blog-time" id="pageDetailTime"></span>
+            </div>
+
+            <!-- Article Body -->
+            <div class="blog-article-body" id="pageDetailText"></div>
+
+            <!-- Related Projects -->
+            <div class="blog-related">
+              <h3>More Projects</h3>
+              <div class="blog-related-grid" id="relatedProjectGrid">
+                <!-- Related projects will be populated here -->
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="main.js"></script>
+    <script>
+      // Load project detail on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get("id");
+        if (projectId) {
+          loadProjectDetailPage(projectId);
+        }
+      });
+    </script>
+  </body>
+</html>
