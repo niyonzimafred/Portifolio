@@ -163,10 +163,12 @@
             <span class="project-category">E-Commerce Redesign</span>
             <h3>Boosting Conversions by 40%</h3>
             <p>
-              Discover how our strategic UX/UI enhancements transformed a
-              struggling e-commerce site into a revenue-generating powerhouse.
+              Discover how strategic UX/UI enhancements transformed a struggling
+              e-commerce site into a revenue-generating powerhouse.
             </p>
-            <a href="#" class="btn-link">Learn More About This Case Study →</a>
+            <a href="blog.html" class="btn-link"
+              >Learn More About This Case Study →</a
+            >
           </div>
           <div class="project-image">
             <img src="./styles/image/PROJECT.jpeg" alt="E-Commerce Redesign" />
@@ -178,10 +180,12 @@
             <span class="project-category">SaaS Dashboard</span>
             <h3>Simplifying Complexity</h3>
             <p>
-              See how we simplified a complex SaaS dashboard, reducing user
-              frustration and improving overall user productivity.
+              See how a complex SaaS dashboard was simplified, reducing user
+              frustration and improving overall productivity.
             </p>
-            <a href="#" class="btn-link">Learn More About This Case Study →</a>
+            <a href="blog.html" class="btn-link"
+              >Learn More About This Case Study →</a
+            >
           </div>
           <div class="project-image">
             <img src="./styles/image/project 4.jpeg" alt="SaaS Dashboard" />
@@ -193,11 +197,13 @@
             <span class="project-category">E-Learning Platform</span>
             <h3>Enhancing Student Success</h3>
             <p>
-              See how our design improvements on an e-learning platform led to
+              See how design improvements on an e-learning platform led to
               higher engagement, better retention rates, and improved learning
               outcomes.
             </p>
-            <a href="#" class="btn-link">Learn More About This Case Study →</a>
+            <a href="blog.html" class="btn-link"
+              >Learn More About This Case Study →</a
+            >
           </div>
           <div class="project-image">
             <img
@@ -477,6 +483,114 @@
       </div>
     </section>
 
+    <!-- Blog Section -->
+    <section class="blog blog--home" id="blog">
+      <div class="container">
+        <div class="section-header">
+          <span class="subtitle">Visit my blog and keep your feedback</span>
+          <h2 class="section-title">Blog post</h2>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+          <div class="blog-card" data-blog-id="1" style="cursor: pointer;" onclick="goToBlogDetail(1)">
+            <div class="blog-image">
+              <img
+                src="./styles/image/project 3.jpeg"
+                alt="What I Learned from Being a Bloke"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Career Journey</span>
+              <div class="blog-meta">
+                <span class="blog-time">Mar 12, 2025 · 5 min read</span>
+              </div>
+              <h3 class="blog-title">
+                What I Learned from Being an Unemployed Graduate
+              </h3>
+              <p class="blog-excerpt">
+                Reflections on resilience, self-belief, and the mindset shifts
+                that turned a difficult season into a powerful foundation for
+                future success.
+              </p>
+              <a href="#" class="blog-read-more" onclick="return false;"
+                >Learn more →</a
+              >
+            </div>
+          </div>
+
+          <div class="blog-card" data-blog-id="2" style="cursor: pointer;" onclick="goToBlogDetail(2)">
+            <div class="blog-image">
+              <img
+                src="./styles/image/project 2.jpeg"
+                alt="Why success people wear The same thing"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">Personal Branding</span>
+              <div class="blog-meta">
+                <span class="blog-time">Feb 3, 2025 · 3 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Why Successful People Wear the Same Thing Every Day
+              </h3>
+              <p class="blog-excerpt">
+                A look at decision fatigue, minimalism, and how simplifying your
+                wardrobe can sharpen your focus on what truly matters.
+              </p>
+              <a href="#" class="blog-read-more" onclick="return false;"
+                >Learn more →</a
+              >
+            </div>
+          </div>
+
+          <div class="blog-card" data-blog-id="3" style="cursor: pointer;" onclick="goToBlogDetail(3)">
+            <div class="blog-image">
+              <img
+                src="./styles/image/project 4.jpeg"
+                alt="Designing for better experiences"
+              />
+            </div>
+            <div class="blog-content">
+              <span class="blog-category">UX Design</span>
+              <div class="blog-meta">
+                <span class="blog-time">Jan 18, 2025 · 4 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Designing Experiences That Feel Effortless for Users
+              </h3>
+              <p class="blog-excerpt">
+                Principles and patterns I use to reduce friction, improve
+                clarity and create interfaces that feel intuitive from the first
+                click.
+              </p>
+              <a href="#" class="blog-read-more" onclick="return false;"
+                >Learn more →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Detail Modal -->
+    <div class="blog-modal" id="blogModal">
+      <div class="blog-modal-overlay" onclick="closeBlogDetail()"></div>
+      <div class="blog-modal-content">
+        <button class="blog-modal-close" onclick="closeBlogDetail()">×</button>
+        <div class="blog-detail">
+          <img src="" alt="" class="blog-detail-image" id="blogDetailImage" />
+          <div class="blog-detail-content">
+            <span class="blog-category" id="blogDetailCategory"></span>
+            <h2 id="blogDetailTitle"></h2>
+            <div class="blog-detail-meta">
+              <span class="blog-time" id="blogDetailTime"></span>
+            </div>
+            <div class="blog-detail-text" id="blogDetailText"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
       <div class="container">
@@ -548,67 +662,6 @@
             <button type="submit" class="btn btn-primary">Send message</button>
             <p class="form-status" id="formStatus" aria-live="polite"></p>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog" id="blog">
-      <div class="container">
-        <div class="section-header">
-          <span class="subtitle">Visit my blog and keep your feedback</span>
-          <h2 class="section-title">Latest insights & stories</h2>
-        </div>
-
-        <div class="blog-grid">
-          <div class="blog-card">
-            <div class="blog-image">
-              <img
-                src="./styles/image/project 3.jpeg"
-                alt="What I Learned from Being a Bloke"
-              />
-            </div>
-            <div class="blog-content">
-              <span class="blog-category">Career Journey</span>
-              <div class="blog-meta">
-                <span class="blog-time">Mar 12, 2025 · 5 min read</span>
-              </div>
-              <h3 class="blog-title">
-                What I Learned from Being an Unemployed Graduate
-              </h3>
-              <p class="blog-excerpt">
-                Reflections on resilience, self-belief, and the mindset shifts
-                that turned a difficult season into a powerful foundation for
-                future success.
-              </p>
-              <a href="blog.html" class="blog-read-more"
-                >Read the full story →</a
-              >
-            </div>
-          </div>
-
-          <div class="blog-card">
-            <div class="blog-image">
-              <img
-                src="./styles/image/project 2.jpeg"
-                alt="Why success people wear The same thing"
-              />
-            </div>
-            <div class="blog-content">
-              <span class="blog-category">Personal Branding</span>
-              <div class="blog-meta">
-                <span class="blog-time">Feb 3, 2025 · 3 min read</span>
-              </div>
-              <h3 class="blog-title">
-                Why Successful People Wear the Same Thing Every Day
-              </h3>
-              <p class="blog-excerpt">
-                A look at decision fatigue, minimalism, and how simplifying your
-                wardrobe can sharpen your focus on what truly matters.
-              </p>
-              <a href="blog.html" class="blog-read-more">Explore this idea →</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>

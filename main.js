@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCardHovers();
   initProjectCardLinks();
   initContactForm();
+  initBlogCardClicks();
   initBlogDetail();
 });
 
@@ -30,7 +31,9 @@ function initMobileMenu() {
     e.stopPropagation();
     nav.classList.toggle("active");
     mobileToggle.classList.toggle("active");
-    document.body.style.overflow = nav.classList.contains("active") ? "hidden" : "";
+    document.body.style.overflow = nav.classList.contains("active")
+      ? "hidden"
+      : "";
   });
 
   // Close menu when clicking on a link
@@ -47,8 +50,12 @@ function initMobileMenu() {
   document.addEventListener("click", function (e) {
     const isClickInsideNav = nav.contains(e.target);
     const isClickOnToggle = mobileToggle.contains(e.target);
-    
-    if (!isClickInsideNav && !isClickOnToggle && nav.classList.contains("active")) {
+
+    if (
+      !isClickInsideNav &&
+      !isClickOnToggle &&
+      nav.classList.contains("active")
+    ) {
       nav.classList.remove("active");
       mobileToggle.classList.remove("active");
       document.body.style.overflow = "";
@@ -246,7 +253,9 @@ function initLazyLoad() {
 
 // Card Hover Effects
 function initCardHovers() {
-  const cards = document.querySelectorAll(".project-card, .blog-card, .skill-card, .testimonial-card");
+  const cards = document.querySelectorAll(
+    ".project-card, .blog-card, .skill-card, .testimonial-card"
+  );
 
   cards.forEach((card) => {
     card.addEventListener("mouseenter", function () {
@@ -337,6 +346,7 @@ function initContactForm() {
 function initBlogDetail() {
   const blogCards = document.querySelectorAll(".blog-card[data-blog-id]");
   const detailSection = document.getElementById("blog-detail");
+  const listSection = document.getElementById("blog");
   const titleEl = document.getElementById("blogDetailTitle");
   const categoryEl = document.getElementById("blogDetailCategory");
   const metaEl = document.getElementById("blogDetailMeta");
@@ -344,7 +354,15 @@ function initBlogDetail() {
   const bodyEl = document.getElementById("blogDetailBody");
   const backLink = document.getElementById("backToBlogList");
 
-  if (!blogCards.length || !detailSection || !titleEl || !categoryEl || !metaEl || !imageEl || !bodyEl) {
+  if (
+    !blogCards.length ||
+    !detailSection ||
+    !titleEl ||
+    !categoryEl ||
+    !metaEl ||
+    !imageEl ||
+    !bodyEl
+  ) {
     return;
   }
 
@@ -358,7 +376,7 @@ function initBlogDetail() {
       paragraphs: [
         "Finishing university without a clear job opportunity in sight can feel like stepping off a cliff. For a while, I measured my value only by the number of applications sent and the replies I didn’t receive.",
         "That season forced me to slow down, reflect, and understand what I actually wanted to build. Instead of chasing every role, I doubled down on the skills and types of work that energized me the most.",
-        "Looking back, that uncomfortable gap became a powerful filter: it sharpened my focus, clarified my values, and made me far more intentional about the roles and projects I say yes to today."
+        "Looking back, that uncomfortable gap became a powerful filter: it sharpened my focus, clarified my values, and made me far more intentional about the roles and projects I say yes to today.",
       ],
     },
     "same-outfit": {
@@ -370,7 +388,7 @@ function initBlogDetail() {
       paragraphs: [
         "From Steve Jobs’ black turtleneck to countless founders’ hoodies, repeating outfits is less about fashion and more about energy management.",
         "Every tiny decision you remove from your mornings creates a little extra space for strategy, creativity, and deep work. Wardrobe is just one lever, but it’s an easy one to experiment with.",
-        "Consistency in how you present yourself can also become part of your personal brand—something people recognize instantly, before you even say a word."
+        "Consistency in how you present yourself can also become part of your personal brand—something people recognize instantly, before you even say a word.",
       ],
     },
     "designing-with-data": {
@@ -382,19 +400,7 @@ function initBlogDetail() {
       paragraphs: [
         "Great dashboards don’t try to show everything—they focus on the questions that matter most to the people using them.",
         "By pairing strong visual hierarchy with clear storytelling, we can turn dense analytics into interfaces that feel simple, human, and immediately useful.",
-        "The goal is not just to display data, but to support better, faster decisions for teams across the organization."
-      ],
-    },
-    "facilitation-lessons": {
-      title: "5 Facilitation Lessons from High-Stakes Workshops",
-      category: "Facilitation",
-      meta: "Dec 2, 2024 · 4 min read",
-      image: "./styles/image/project 4.jpeg",
-      imageAlt: "Team in a workshop",
-      paragraphs: [
-        "High‑stakes workshops are rarely about the slides—they’re about the energy in the room and the clarity of the outcomes.",
-        "Setting expectations early, naming tensions openly, and designing moments for quiet reflection are small tactics that dramatically improve group outcomes.",
-        "Facilitation is ultimately an act of service: your job is to help the group see options more clearly and move together with confidence."
+        "The goal is not just to display data, but to support better, faster decisions for teams across the organization.",
       ],
     },
   };
@@ -416,6 +422,10 @@ function initBlogDetail() {
       bodyEl.appendChild(p);
     });
 
+    // Hide list, show detail view
+    if (listSection) {
+      listSection.classList.add("hidden");
+    }
     detailSection.classList.remove("hidden");
 
     const headerOffset = document.querySelector(".header")?.offsetHeight || 0;
@@ -447,11 +457,17 @@ function initBlogDetail() {
   if (backLink) {
     backLink.addEventListener("click", function (e) {
       e.preventDefault();
-      const blogListSection = document.getElementById("blog");
-      if (!blogListSection) return;
+      if (listSection) {
+        listSection.classList.remove("hidden");
+      }
+      if (detailSection) {
+        detailSection.classList.add("hidden");
+      }
 
       const headerOffset = document.querySelector(".header")?.offsetHeight || 0;
-      const sectionTop = blogListSection.offsetTop - headerOffset - 20;
+      const sectionTop = listSection
+        ? listSection.offsetTop - headerOffset - 20
+        : 0;
       window.scrollTo({ top: sectionTop, behavior: "smooth" });
     });
   }
@@ -528,6 +544,138 @@ function scrollToSection(sectionId) {
   });
 }
 
+// Blog Card Click Handler
+function initBlogCardClicks() {
+  // Function will be called on page - navigation is handled via onclick in HTML
+}
+
+// Navigate to blog detail page
+function goToBlogDetail(blogId) {
+  window.location.href = `blog-detail.html?id=${blogId}`;
+}
+
+// Load blog detail on page
+function loadBlogDetailPage(blogId) {
+  const blog = blogData[blogId];
+  if (!blog) {
+    window.location.href = "Index.html#blog";
+    return;
+  }
+
+  document.getElementById("pageDetailImage").src = blog.image;
+  document.getElementById("pageDetailCategory").textContent = blog.category;
+  document.getElementById("pageDetailTitle").textContent = blog.title;
+  document.getElementById("pageDetailTime").textContent = blog.time;
+  document.getElementById("pageDetailText").innerHTML = blog.content;
+
+  // Load related blogs
+  loadRelatedBlogs(blogId);
+}
+
+// Load related blogs
+function loadRelatedBlogs(currentBlogId) {
+  const relatedGrid = document.getElementById("relatedBlogGrid");
+  if (!relatedGrid) return;
+
+  relatedGrid.innerHTML = "";
+  
+  Object.keys(blogData).forEach((id) => {
+    if (id !== currentBlogId.toString()) {
+      const blog = blogData[id];
+      const blogCard = `
+        <div class="blog-card-small" onclick="goToBlogDetail(${id})">
+          <div class="blog-image-small">
+            <img src="${blog.image}" alt="${blog.title}" />
+          </div>
+          <div class="blog-content-small">
+            <span class="blog-category">${blog.category}</span>
+            <h4>${blog.title}</h4>
+            <span class="blog-time">${blog.time}</span>
+          </div>
+        </div>
+      `;
+      relatedGrid.innerHTML += blogCard;
+    }
+  });
+}
+
+// Blog Data
+const blogData = {
+  1: {
+    title: "What I Learned from Being an Unemployed Graduate",
+    category: "Career Journey",
+    time: "Mar 12, 2025 · 5 min read",
+    image: "./styles/image/project 3.jpeg",
+    content: `<p>Being unemployed after graduation was one of the most challenging periods of my life. However, it became the foundation for everything I've achieved since. Here's what I learned:</p>
+
+<p><strong>Resilience is a Muscle</strong><br>
+When rejection after rejection came in, I learned that resilience isn't about never falling down. It's about getting back up, learning something new, and trying again with better tools and mindset.</p>
+
+<p><strong>Self-Belief Matters More Than You Think</strong><br>
+During those months, I realized that employers could sense my doubt. Once I genuinely believed in my value and what I could contribute, everything changed. People started believing in me because I believed in myself first.</p>
+
+<p><strong>Continuous Learning is Your Best Investment</strong><br>
+Instead of waiting for a job offer, I spent those months learning new design tools, reading design philosophy, and building projects. When I finally got interviews, I had so much more to show and discuss.</p>
+
+<p><strong>Your Network is Your Net Worth</strong><br>
+I started attending design meetups, connecting with other designers, and engaging in online communities. These relationships led to my first real opportunities, and many of them have become lifelong professional relationships.</p>
+
+<p><strong>The Journey Matters More Than the Destination</strong><br>
+Looking back, those difficult months shaped my character, my work ethic, and my perspective on challenges. They taught me empathy for others going through similar situations and made me more determined to help others in my field.</p>`
+  },
+  2: {
+    title: "Why Successful People Wear the Same Thing Every Day",
+    category: "Personal Branding",
+    time: "Feb 3, 2025 · 3 min read",
+    image: "./styles/image/project 2.jpeg",
+    content: `<p>Steve Jobs wore the same black turtleneck, Zuckerberg wears the same gray t-shirt, and many other successful leaders follow a similar pattern. But this isn't about fashion—it's about decision fatigue and mental clarity.</p>
+
+<p><strong>What is Decision Fatigue?</strong><br>
+Every decision you make depletes your mental energy. From choosing what to wear to deciding on business strategies, your brain has a limited amount of decision-making capacity each day. By eliminating trivial decisions, you preserve energy for important ones.</p>
+
+<p><strong>The Uniform Advantage</strong><br>
+When you wear the same thing regularly, you're not being lazy—you're being strategic. You're saying that your clothes are not where you want to waste your limited decision-making power. Your mind can focus on your work, your goals, and your impact.</p>
+
+<p><strong>Building Your Personal Uniform</strong><br>
+Find a style that works for you, that makes you feel confident, and that aligns with your professional image. Keep it simple. This isn't about boredom; it's about clarity and intention.</p>
+
+<p><strong>Beyond Fashion</strong><br>
+This principle applies to more than just clothing. It applies to your workspace setup, your morning routine, and your work process. The more consistent and automated these elements become, the more mental energy you have for creative and strategic work.</p>
+
+<p>Success isn't about having more choices—it's about making better choices with the ones that matter.</p>`
+  },
+  3: {
+    title: "Designing Experiences That Feel Effortless for Users",
+    category: "UX Design",
+    time: "Jan 18, 2025 · 4 min read",
+    image: "./styles/image/project 4.jpeg",
+    content: `<p>Great design is invisible. When users find it effortless to accomplish their goals, they don't think about the design—they think about what they accomplished. Here's how I approach creating such experiences:</p>
+
+<p><strong>Reduce Cognitive Load</strong><br>
+Users have limited attention. Every visual element, every interaction, and every piece of text competes for their mental resources. By removing unnecessary elements and guiding users through clear paths, we make experiences feel easier.</p>
+
+<p><strong>Use Familiar Patterns</strong><br>
+Don't reinvent the wheel. Users come with mental models built from years of using other applications. When we follow familiar patterns, users immediately understand how to interact with our design.</p>
+
+<p><strong>Progressive Disclosure</strong><br>
+Show users what they need now, and reveal advanced options when they're ready. This keeps the interface clean and the learning curve gentle.</p>
+
+<p><strong>Feedback at Every Step</strong><br>
+Users should always know what's happening. Clear feedback about their actions, system status, and progress makes experiences feel responsive and trustworthy.</p>
+
+<p><strong>Accessibility is Not a Feature</strong><br>
+Designing for accessibility benefits everyone. Clear text hierarchy, sufficient contrast, and keyboard navigation make interfaces easier for all users, not just those with disabilities.</p>
+
+<p><strong>Test with Real Users</strong><br>
+Our assumptions are often wrong. By testing designs with actual users and observing their struggles, we uncover where experiences feel effortless and where they're causing friction.</p>
+
+<p>The goal is simple: make it so easy and natural that users forget they're using an interface and remember the value they received.</p>`
+  }
+};
+
+// Show Blog Detail
+// Removed - using page navigation instead
+
 // Export functions for use in other files
 window.portfolioUtils = {
   validateForm,
@@ -538,4 +686,6 @@ window.portfolioUtils = {
   isInViewport,
   getElementHeight,
   scrollToSection,
+  goToBlogDetail,
+  loadBlogDetailPage,
 };

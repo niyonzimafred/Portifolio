@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - Fred - Senior UX Designer</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+  </head>
+  <body class="white-version">
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/">
+              <img
+                src="./styles/image/fred.jpg"
+                alt="Fred Logo"
+                class="logo-img"
+              />
+            </a>
+            <h2>FRED</h2>
+          </div>
+
+          <nav class="nav" id="nav">
+            <ul class="nav-list">
+              <li><a href="Index.html#home">Home</a></li>
+              <li><a href="Index.html#about">About</a></li>
+              <li><a href="Index.html#services">Services</a></li>
+              <li><a href="Index.html#portfolio">Portfolio</a></li>
+              <li><a href="Index.html#skills">Skills</a></li>
+              <li><a href="Index.html#blog">Blog</a></li>
+              <li><a href="Index.html#contact">Contact</a></li>
+            </ul>
+          </nav>
+
+          <button class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Blog Detail Page -->
+    <section class="blog-detail-page" id="blogDetailPage">
+      <div class="container">
+        <!-- Back Button -->
+        <a href="Index.html#blog" class="blog-back-link">← Back to Blog</a>
+
+        <article class="blog-article">
+          <!-- Hero Image -->
+          <div class="blog-hero-image">
+            <img src="" alt="" id="pageDetailImage" />
+          </div>
+
+          <!-- Content -->
+          <div class="blog-article-content">
+            <span class="blog-category" id="pageDetailCategory"></span>
+            <h1 id="pageDetailTitle"></h1>
+
+            <div class="blog-article-meta">
+              <span class="blog-time" id="pageDetailTime"></span>
+            </div>
+
+            <!-- Article Body -->
+            <div class="blog-article-body" id="pageDetailText"></div>
+
+            <!-- Related Articles -->
+            <div class="blog-related">
+              <h3>More Articles</h3>
+              <div class="blog-related-grid" id="relatedBlogGrid">
+                <!-- Related blogs will be populated here -->
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h2>FRED</h2>
+            <img
+              src="./styles/image/fred.jpg"
+              alt="Fred Logo"
+              class="footer-logo"
+            />
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">FB</a>
+              <a href="#" aria-label="Twitter">TW</a>
+              <a href="#" aria-label="LinkedIn">LI</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h6>Quick Link</h6>
+            <ul>
+              <li><a href="Index.html#about">About</a></li>
+              <li><a href="Index.html#portfolio">Portfolio</a></li>
+              <li><a href="Index.html#services">Services</a></li>
+              <li><a href="Index.html#blog">Blog</a></li>
+              <li><a href="Index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h6>Resources</h6>
+            <ul>
+              <li><a href="#">Authentication</a></li>
+              <li><a href="#">System Status</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h6>Developers</h6>
+            <ul>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">API Reference</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Open Source</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>© 2025. All rights reserved by Rainbow-Themes</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      ↑
+    </button>
+
+    <script src="main.js"></script>
+    <script>
+      // Load blog detail on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogId = urlParams.get("id");
+        if (blogId) {
+          loadBlogDetailPage(blogId);
+        }
+      });
+    </script>
+  </body>
+</html>
