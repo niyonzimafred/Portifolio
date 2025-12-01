@@ -9,28 +9,34 @@ document.addEventListener("DOMContentLoaded", function () {
   initBackToTop();
   initHeaderScroll();
   initProgressBars();
+  updateActiveNav();
+  initLazyLoad();
+  initCardHovers();
+  initProjectCardLinks();
+  initContactForm();
+  initBlogDetail();
 });
 
 // Mobile Menu Toggle
 function initMobileMenu() {
   const mobileToggle = document.getElementById("mobileToggle");
   const nav = document.getElementById("nav");
-  const navLinks = nav.querySelectorAll("a");
+  const navLinks = nav ? nav.querySelectorAll("a") : [];
 
   if (!mobileToggle || !nav) return;
 
-  // Toggle menu
-  mobileToggle.addEventListener("click", function () {
+  // Toggle menu on hamburger click
+  mobileToggle.addEventListener("click", function (e) {
+    e.stopPropagation();
     nav.classList.toggle("active");
-    this.classList.toggle("active");
-    document.body.style.overflow = nav.classList.contains("active")
-      ? "hidden"
-      : "";
+    mobileToggle.classList.toggle("active");
+    document.body.style.overflow = nav.classList.contains("active") ? "hidden" : "";
   });
 
   // Close menu when clicking on a link
   navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
+    link.addEventListener("click", function (e) {
+      // Allow the default smooth scroll behavior
       nav.classList.remove("active");
       mobileToggle.classList.remove("active");
       document.body.style.overflow = "";
@@ -39,7 +45,19 @@ function initMobileMenu() {
 
   // Close menu when clicking outside
   document.addEventListener("click", function (e) {
-    if (!nav.contains(e.target) && !mobileToggle.contains(e.target)) {
+    const isClickInsideNav = nav.contains(e.target);
+    const isClickOnToggle = mobileToggle.contains(e.target);
+    
+    if (!isClickInsideNav && !isClickOnToggle && nav.classList.contains("active")) {
+      nav.classList.remove("active");
+      mobileToggle.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Close menu when pressing Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && nav.classList.contains("active")) {
       nav.classList.remove("active");
       mobileToggle.classList.remove("active");
       document.body.style.overflow = "";
@@ -92,7 +110,7 @@ function initScrollAnimations() {
 
   // Observe elements
   const animateElements = document.querySelectorAll(
-    ".skill-card, .project-card, .blog-card, .about-content, .hero-content"
+    ".skill-card, .project-card, .blog-card, .testimonial-card, .testimonial-content-card, .about-content, .hero-content, .case-study-grid"
   );
 
   animateElements.forEach((el) => {
@@ -180,8 +198,8 @@ function updateActiveNav() {
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll(".nav-list a");
 
-  let current = "";
   const scrollPosition = window.pageYOffset;
+  let current = "";
 
   sections.forEach((section) => {
     const sectionTop = section.offsetTop - 100;
@@ -197,30 +215,68 @@ function updateActiveNav() {
 
   navLinks.forEach((link) => {
     link.classList.remove("active");
-    if (link.getAttribute("href") === `#${current}`) {
+    const href = link.getAttribute("href");
+    if (href === `#${current}`) {
       link.classList.add("active");
     }
   });
 }
 
-window.addEventListener("scroll", updateActiveNav);
+window.addEventListener("scroll", debounce(updateActiveNav, 100));
 
 // Lazy Load Images
 function initLazyLoad() {
   const images = document.querySelectorAll("img[data-src]");
 
-  const imageObserver = new IntersectionObserver(function (entries, observer) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute("data-src");
-        observer.unobserve(img);
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver(function (entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute("data-src");
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach((img) => imageObserver.observe(img));
+  }
+}
+
+// Card Hover Effects
+function initCardHovers() {
+  const cards = document.querySelectorAll(".project-card, .blog-card, .skill-card, .testimonial-card");
+
+  cards.forEach((card) => {
+    card.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-5px)";
+    });
+
+    card.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(0)";
+    });
+  });
+}
+
+// Project Card Link Navigation
+function initProjectCardLinks() {
+  const projectCards = document.querySelectorAll(".project-card");
+
+  projectCards.forEach((card, index) => {
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", function () {
+      const link = this.querySelector(".btn-link");
+      if (link) {
+        // Add click animation
+        this.style.transform = "scale(0.98)";
+        setTimeout(() => {
+          this.style.transform = "scale(1)";
+        }, 200);
       }
     });
   });
-
-  images.forEach((img) => imageObserver.observe(img));
 }
 
 // Form Validation (if you add a contact form)
@@ -247,6 +303,158 @@ function validateForm(form) {
   });
 
   return isValid;
+}
+
+// Contact Form Handler
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+
+  if (!form || !status) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    status.textContent = "";
+    status.classList.remove("success", "error");
+
+    const isValid = validateForm(form);
+
+    if (!isValid) {
+      status.textContent = "Please fill in all required fields correctly.";
+      status.classList.add("error");
+      return;
+    }
+
+    // Simulate successful submission
+    form.reset();
+    status.textContent = "Thank you! Your message has been sent.";
+    status.classList.add("success");
+  });
+}
+
+// Blog Detail Handler (for blog.html)
+function initBlogDetail() {
+  const blogCards = document.querySelectorAll(".blog-card[data-blog-id]");
+  const detailSection = document.getElementById("blog-detail");
+  const titleEl = document.getElementById("blogDetailTitle");
+  const categoryEl = document.getElementById("blogDetailCategory");
+  const metaEl = document.getElementById("blogDetailMeta");
+  const imageEl = document.getElementById("blogDetailImage");
+  const bodyEl = document.getElementById("blogDetailBody");
+  const backLink = document.getElementById("backToBlogList");
+
+  if (!blogCards.length || !detailSection || !titleEl || !categoryEl || !metaEl || !imageEl || !bodyEl) {
+    return;
+  }
+
+  const articles = {
+    "unemployed-graduate": {
+      title: "What I Learned from Being an Unemployed Graduate",
+      category: "Career Journey",
+      meta: "Mar 12, 2025 · 5 min read",
+      image: "./styles/image/project 3.jpeg",
+      imageAlt: "Unemployed graduate reflective moment",
+      paragraphs: [
+        "Finishing university without a clear job opportunity in sight can feel like stepping off a cliff. For a while, I measured my value only by the number of applications sent and the replies I didn’t receive.",
+        "That season forced me to slow down, reflect, and understand what I actually wanted to build. Instead of chasing every role, I doubled down on the skills and types of work that energized me the most.",
+        "Looking back, that uncomfortable gap became a powerful filter: it sharpened my focus, clarified my values, and made me far more intentional about the roles and projects I say yes to today."
+      ],
+    },
+    "same-outfit": {
+      title: "Why Successful People Wear the Same Thing Every Day",
+      category: "Personal Branding",
+      meta: "Feb 3, 2025 · 3 min read",
+      image: "./styles/image/project 2.jpeg",
+      imageAlt: "Minimal wardrobe concept",
+      paragraphs: [
+        "From Steve Jobs’ black turtleneck to countless founders’ hoodies, repeating outfits is less about fashion and more about energy management.",
+        "Every tiny decision you remove from your mornings creates a little extra space for strategy, creativity, and deep work. Wardrobe is just one lever, but it’s an easy one to experiment with.",
+        "Consistency in how you present yourself can also become part of your personal brand—something people recognize instantly, before you even say a word."
+      ],
+    },
+    "designing-with-data": {
+      title: "Designing with Data: Turning Dashboards into Decisions",
+      category: "UX & Data",
+      meta: "Jan 10, 2025 · 6 min read",
+      image: "./styles/image/PROJECT.jpeg",
+      imageAlt: "Analytics dashboard design",
+      paragraphs: [
+        "Great dashboards don’t try to show everything—they focus on the questions that matter most to the people using them.",
+        "By pairing strong visual hierarchy with clear storytelling, we can turn dense analytics into interfaces that feel simple, human, and immediately useful.",
+        "The goal is not just to display data, but to support better, faster decisions for teams across the organization."
+      ],
+    },
+    "facilitation-lessons": {
+      title: "5 Facilitation Lessons from High-Stakes Workshops",
+      category: "Facilitation",
+      meta: "Dec 2, 2024 · 4 min read",
+      image: "./styles/image/project 4.jpeg",
+      imageAlt: "Team in a workshop",
+      paragraphs: [
+        "High‑stakes workshops are rarely about the slides—they’re about the energy in the room and the clarity of the outcomes.",
+        "Setting expectations early, naming tensions openly, and designing moments for quiet reflection are small tactics that dramatically improve group outcomes.",
+        "Facilitation is ultimately an act of service: your job is to help the group see options more clearly and move together with confidence."
+      ],
+    },
+  };
+
+  function openArticle(id) {
+    const article = articles[id];
+    if (!article) return;
+
+    categoryEl.textContent = article.category;
+    titleEl.textContent = article.title;
+    metaEl.textContent = article.meta;
+    imageEl.src = article.image;
+    imageEl.alt = article.imageAlt;
+
+    bodyEl.innerHTML = "";
+    article.paragraphs.forEach((text) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      bodyEl.appendChild(p);
+    });
+
+    detailSection.classList.remove("hidden");
+
+    const headerOffset = document.querySelector(".header")?.offsetHeight || 0;
+    const sectionTop = detailSection.offsetTop - headerOffset - 20;
+    window.scrollTo({ top: sectionTop, behavior: "smooth" });
+  }
+
+  blogCards.forEach((card) => {
+    const id = card.getAttribute("data-blog-id");
+    if (!id) return;
+
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", function (e) {
+      // Avoid double-handling if link itself is clicked
+      if (e.target.closest(".blog-read-more")) return;
+      openArticle(id);
+    });
+
+    const readMore = card.querySelector(".blog-read-more");
+    if (readMore) {
+      readMore.addEventListener("click", function (e) {
+        e.preventDefault();
+        openArticle(id);
+      });
+    }
+  });
+
+  if (backLink) {
+    backLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      const blogListSection = document.getElementById("blog");
+      if (!blogListSection) return;
+
+      const headerOffset = document.querySelector(".header")?.offsetHeight || 0;
+      const sectionTop = blogListSection.offsetTop - headerOffset - 20;
+      window.scrollTo({ top: sectionTop, behavior: "smooth" });
+    });
+  }
 }
 
 // Debounce Function for Performance
@@ -306,6 +514,20 @@ function isInViewport(element) {
   );
 }
 
+// Connect Sections - Scroll to section with smooth transition
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const headerHeight = document.querySelector(".header")?.offsetHeight || 0;
+  const targetPosition = section.offsetTop - headerHeight;
+
+  window.scrollTo({
+    top: targetPosition,
+    behavior: "smooth",
+  });
+}
+
 // Export functions for use in other files
 window.portfolioUtils = {
   validateForm,
@@ -315,4 +537,5 @@ window.portfolioUtils = {
   hideLoading,
   isInViewport,
   getElementHeight,
+  scrollToSection,
 };

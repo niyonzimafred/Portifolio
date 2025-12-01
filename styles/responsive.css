@@ -41,6 +41,27 @@
     grid-template-columns: 1fr 1fr;
     gap: 30px;
   }
+
+  /* Testimonials (Commendations) */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .testimonial-card,
+  .testimonial-content-card {
+    padding: 30px;
+  }
+
+  /* Case Study (E-Learning section) */
+  .case-study-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study-image,
+  .case-study-content {
+    padding: 40px 20px;
+  }
 }
 
 /* Mobile Styles - 768px and below */
@@ -77,6 +98,7 @@
     transition: left 0.3s ease;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     z-index: 999;
+    overflow-y: auto;
   }
 
   .nav.active {
@@ -88,8 +110,24 @@
     gap: 20px;
   }
 
+  .nav-list li {
+    list-style: none;
+  }
+
   .nav-list a {
     font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    display: block;
+    padding: 10px 0;
+  }
+
+  .nav-list a::after {
+    display: none;
+  }
+
+  .nav-list a:hover {
+    color: var(--primary-color);
   }
 
   /* Hero */
@@ -144,6 +182,15 @@
 
   /* Footer */
   .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
     grid-template-columns: 1fr;
   }
 
@@ -212,6 +259,19 @@
 
   .testimonial-card {
     padding: 25px;
+  }
+
+  .testimonial-avatar {
+    width: 200px;
+    height: 200px;
+  }
+
+  .case-study-title {
+    font-size: 1.75rem;
+  }
+
+  .case-study-content {
+    padding: 30px 15px;
   }
 
   .testimonial-header {

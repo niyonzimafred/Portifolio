@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fred – Blog</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+  </head>
+  <body class="white-version">
+    <!-- Simple header for blog page -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="Index.html">
+              <img src="./styles/image/fred.jpg" alt="Fred Logo" class="logo-img" />
+            </a>
+            <h2>FRED</h2>
+          </div>
+          <nav class="nav" id="nav">
+            <ul class="nav-list">
+              <li><a href="Index.html#home">Home</a></li>
+              <li><a href="Index.html#about">About</a></li>
+              <li><a href="Index.html#portfolio">Portfolio</a></li>
+              <li><a href="Index.html#blog" class="active">Blog</a></li>
+              <li><a href="Index.html#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <button class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="blog" id="blog">
+        <div class="container">
+          <div class="section-header">
+            <span class="subtitle">Blog</span>
+            <h2 class="section-title">More insights & case studies</h2>
+            <p>Explore additional thoughts on UX, product strategy, and personal growth.</p>
+          </div>
+
+          <div class="blog-grid">
+            <!-- Reuse the two main posts -->
+            <div class="blog-card" data-blog-id="unemployed-graduate">
+              <div class="blog-image">
+                <img src="./styles/image/project 3.jpeg" alt="What I Learned from Being an Unemployed Graduate" />
+              </div>
+              <div class="blog-content">
+                <span class="blog-category">Career Journey</span>
+                <div class="blog-meta">
+                  <span class="blog-time">Mar 12, 2025 · 5 min read</span>
+                </div>
+                <h3 class="blog-title">What I Learned from Being an Unemployed Graduate</h3>
+                <p class="blog-excerpt">
+                  Reflections on resilience, self-belief, and the mindset shifts that turned a difficult season
+                  into a powerful foundation for future success.
+                </p>
+                <a href="#blog-detail" class="blog-read-more">Read the full story →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-blog-id="same-outfit">
+              <div class="blog-image">
+                <img src="./styles/image/project 2.jpeg" alt="Why Successful People Wear the Same Thing Every Day" />
+              </div>
+              <div class="blog-content">
+                <span class="blog-category">Personal Branding</span>
+                <div class="blog-meta">
+                  <span class="blog-time">Feb 3, 2025 · 3 min read</span>
+                </div>
+                <h3 class="blog-title">Why Successful People Wear the Same Thing Every Day</h3>
+                <p class="blog-excerpt">
+                  A look at decision fatigue, minimalism, and how simplifying your wardrobe can sharpen your
+                  focus on what truly matters.
+                </p>
+                <a href="#blog-detail" class="blog-read-more">Explore this idea →</a>
+              </div>
+            </div>
+
+            <!-- Extra sample posts -->
+            <div class="blog-card" data-blog-id="designing-with-data">
+              <div class="blog-image">
+                <img src="./styles/image/PROJECT.jpeg" alt="Designing with Data" />
+              </div>
+              <div class="blog-content">
+                <span class="blog-category">UX & Data</span>
+                <div class="blog-meta">
+                  <span class="blog-time">Jan 10, 2025 · 6 min read</span>
+                </div>
+                <h3 class="blog-title">Designing with Data: Turning Dashboards into Decisions</h3>
+                <p class="blog-excerpt">
+                  Practical principles for turning complex analytics into interfaces that feel simple, human,
+                  and immediately actionable for stakeholders.
+                </p>
+                <a href="#blog-detail" class="blog-read-more">Read on my full blog →</a>
+              </div>
+            </div>
+
+            <div class="blog-card" data-blog-id="facilitation-lessons">
+              <div class="blog-image">
+                <img src="./styles/image/project 4.jpeg" alt="Facilitation Lessons" />
+              </div>
+              <div class="blog-content">
+                <span class="blog-category">Facilitation</span>
+                <div class="blog-meta">
+                  <span class="blog-time">Dec 2, 2024 · 4 min read</span>
+                </div>
+                <h3 class="blog-title">5 Facilitation Lessons from High-Stakes Workshops</h3>
+                <p class="blog-excerpt">
+                  Stories and techniques from real sessions that show how to guide teams toward clarity,
+                  alignment, and confident decisions.
+                </p>
+                <a href="#blog-detail" class="blog-read-more">View the full case study →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Detail Section (filled dynamically) -->
+      <section class="blog-detail hidden" id="blog-detail">
+        <div class="container">
+          <article class="blog-detail-card">
+            <header class="blog-detail-header">
+              <span class="blog-category" id="blogDetailCategory">Category</span>
+              <h1 class="blog-detail-title" id="blogDetailTitle">Blog title</h1>
+              <div class="blog-meta">
+                <span class="blog-time" id="blogDetailMeta">Date · read time</span>
+              </div>
+            </header>
+            <div class="blog-detail-image-wrapper">
+              <img src="" alt="" id="blogDetailImage" class="blog-detail-image" />
+            </div>
+            <div class="blog-detail-body" id="blogDetailBody">
+              <!-- Paragraphs will be injected here -->
+            </div>
+            <footer class="blog-detail-footer">
+              <a href="#blog" class="btn btn-link" id="backToBlogList">← Back to all posts</a>
+            </footer>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="copyright">
+          <p>© 2025. All rights reserved by Fred.</p>
+        </div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    <script src="main.js"></script>
+  </body>
+</html>
+
+

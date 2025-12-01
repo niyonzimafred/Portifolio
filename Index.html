@@ -53,7 +53,9 @@
             <span class="subtitle">Hi there! I'm</span>
             <h1 class="title">
               A Senior UX Designer <span class="highlight">Fred</span><br />
-              <span class="location">based in Kigali, Rwanda</span>
+              <span class="location"
+                ><span class="highlight">in Kigali, Rwanda</span></span
+              >
             </h1>
             <p class="description">
               Designing intuitive experiences. I use animation as a third
@@ -70,9 +72,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    
     </section>
 
     <!-- About Section -->
@@ -97,16 +96,18 @@
             <p>
               For a more comprehensive understanding of my qualifications and
               career achievements, please visit my
-              <a href="#">LinkedIn profile</a>.
+              <a1 href="#">Facebook profile</a1>.
             </p>
-            <a href="#" class="btn btn-large">Download Resume</a>
+            <a2 href="./resume.pdf" download="Fred_Resume.pdf" class="word-box"
+              >Download Resume</a2
+            >
           </div>
         </div>
       </div>
     </section>
 
     <!-- Featured Work Section -->
-   <section class="Services" id="services">
+    <section class="Services" id="services">
       <div class="container">
         <span class="subtitle"
           >Here is a sample of projects I've worked on.</span
@@ -199,7 +200,10 @@
             <a href="#" class="btn-link">Learn More About This Case Study →</a>
           </div>
           <div class="project-image">
-            <img src="./styles/image/project 3.jpeg" alt="E-Learning Platform" />
+            <img
+              src="./styles/image/project 3.jpeg"
+              alt="E-Learning Platform"
+            />
           </div>
         </div>
       </div>
@@ -338,7 +342,10 @@
     <!-- Case Study Section -->
     <section class="case-study" id="case-study">
       <div class="case-study-header">
-        <p class="case-study-quote">I always strive to use the best techniques and approaches to achieve the highest quality results.</p>
+        <p class="case-study-quote">
+          I always strive to use the best techniques and approaches to achieve
+          the highest quality results.
+        </p>
       </div>
       <div class="container">
         <div class="case-study-grid">
@@ -350,12 +357,16 @@
             />
           </div>
           <div class="case-study-content">
-            <span class="case-study-category">E-Learning Platform</span>
+            <span class="head">E-Learning Platform</span>
             <h2 class="case-study-title">Enhancing Student Success</h2>
             <p class="case-study-description">
-              See how our design improvements on an e-learning platform led to higher engagement, better retention rates, and improved learning outcomes.
+              See how our design improvements on an e-learning platform led to
+              higher engagement, better retention rates, and improved learning
+              outcomes.
             </p>
-            <a href="#" class="case-study-link">Learn more about this case study →</a>
+            <a href="#" class="case-study-link"
+              >Learn more about this case study →</a
+            >
           </div>
         </div>
       </div>
@@ -436,7 +447,11 @@
         <div class="testimonials-grid">
           <div class="testimonial-card">
             <div class="testimonial-profile">
-              <img src="./styles/image/fred 0.jpg" alt="Jone Duone Joe" class="testimonial-avatar" />
+              <img
+                src="./styles/image/fred 0.jpg"
+                alt="Jone Duone Joe"
+                class="testimonial-avatar"
+              />
               <div class="testimonial-tag">Ban on black</div>
             </div>
             <h4 class="testimonial-name">Jone duone Joe</h4>
@@ -454,9 +469,85 @@
             </div>
             <p class="testimonial-date">Upwork - Mar 4,2017-Aug 30,2018</p>
             <p class="testimonial-text">
-              Amazing job, and I trulchieve even more. I'm really proud of how far you've come; your progress is inspiring.
+              Amazing job, and I trulchieve even more. I'm really proud of how
+              far you've come; your progress is inspiring.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="subtitle">Get in touch</span>
+          <h2 class="section-title">Contact me</h2>
+          <p>
+            If you’d like to discuss a project, collaboration, or opportunity,
+            send me a message below.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Let’s work together</h3>
+            <p>
+              Share a few details about what you’re looking for and I’ll get
+              back to you as soon as possible.
+            </p>
+            <ul class="contact-list">
+              <li><strong>Email:</strong> fred@example.com</li>
+              <li><strong>Location:</strong> Kigali, Rwanda</li>
+            </ul>
+          </div>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="How can I help?"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Write your message..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
@@ -466,27 +557,56 @@
       <div class="container">
         <div class="section-header">
           <span class="subtitle">Visit my blog and keep your feedback</span>
-          <h2 class="section-title">Blog post</h2>
+          <h2 class="section-title">Latest insights & stories</h2>
         </div>
 
         <div class="blog-grid">
           <div class="blog-card">
             <div class="blog-image">
-              <img src="./styles/image/project 3.jpeg" alt="What I Learned from Being a Bloke" />
+              <img
+                src="./styles/image/project 3.jpeg"
+                alt="What I Learned from Being a Bloke"
+              />
             </div>
             <div class="blog-content">
-              <span class="blog-category">GALLERY</span>
-              <h3 class="blog-title">What I Learned from Being a Bloke, unemployed Graduate.</h3>
+              <span class="blog-category">Career Journey</span>
+              <div class="blog-meta">
+                <span class="blog-time">Mar 12, 2025 · 5 min read</span>
+              </div>
+              <h3 class="blog-title">
+                What I Learned from Being an Unemployed Graduate
+              </h3>
+              <p class="blog-excerpt">
+                Reflections on resilience, self-belief, and the mindset shifts
+                that turned a difficult season into a powerful foundation for
+                future success.
+              </p>
+              <a href="blog.html" class="blog-read-more"
+                >Read the full story →</a
+              >
             </div>
           </div>
 
           <div class="blog-card">
             <div class="blog-image">
-              <img src="./styles/image/project 2.jpeg" alt="Why success people wear The same thing" />
+              <img
+                src="./styles/image/project 2.jpeg"
+                alt="Why success people wear The same thing"
+              />
             </div>
             <div class="blog-content">
-              <span class="blog-category">Development</span>
-              <h3 class="blog-title">Why success people wear The same thing Every day.</h3>
+              <span class="blog-category">Personal Branding</span>
+              <div class="blog-meta">
+                <span class="blog-time">Feb 3, 2025 · 3 min read</span>
+              </div>
+              <h3 class="blog-title">
+                Why Successful People Wear the Same Thing Every Day
+              </h3>
+              <p class="blog-excerpt">
+                A look at decision fatigue, minimalism, and how simplifying your
+                wardrobe can sharpen your focus on what truly matters.
+              </p>
+              <a href="blog.html" class="blog-read-more">Explore this idea →</a>
             </div>
           </div>
         </div>
@@ -498,20 +618,20 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-             <h2>FRED</h2>
             <img
               src="./styles/image/fred.jpg"
               alt="Fred Logo"
               class="footer-logo"
             />
+            <h3>FRED</h3>
             <div class="social-links">
-              <a href="#" aria-label="Facebook">FB</a>
-              <a href="#" aria-label="Twitter">TW</a>
-              <a href="#" aria-label="LinkedIn">LI</a>
+              <img src="./styles/image/facebook.jpg" alt="Facebook" />
+              <img src="./styles/image/instagram.jpg" alt="Instagram" />
+              <img src="./styles/image/twitter.jpg" alt="Twitter" />
             </div>
           </div>
           <div class="footer-col">
-            <h6>Quick Link</h6>
+            <h5>Quick Link</h5>
             <ul>
               <li><a href="#about">About</a></li>
               <li><a href="#portfolio">Portfolio</a></li>
@@ -521,7 +641,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h6>Resources</h6>
+            <h5>Resources</h5>
             <ul>
               <li><a href="#">Authentication</a></li>
               <li><a href="#">System Status</a></li>
@@ -530,7 +650,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h6>Developers</h6>
+            <h5>Developers</h5>
             <ul>
               <li><a href="#">Documentation</a></li>
               <li><a href="#">API Reference</a></li>
@@ -550,6 +670,6 @@
       ↑
     </button>
 
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
